@@ -1,0 +1,87 @@
+@using Simulator.Interfaces;
+@inject INameValidator<string> teamNameValidator
+@inject Simulator.Services.SimulationService simulationService
+
+
+@code {
+    private string[] TeamErrors { get; } = new string[4];
+    private char[] AlphabetUpper { get; } = new char[26] {
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+      'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+      'W', 'X', 'Y', 'Z'
+    };
+    private List<Team> Teams { get; set; } = new List<Team>
+    {
+        new Team(),
+        new Team(),
+        new Team(),
+        new Team()
+    };
+
+    private async Task ValidateAndSaveTeams()
+    {
+        bool allValid = true;
+        for (int i = 0; i < Teams.Count; i++)
+        {
+            if (!teamNameValidator.IsValid(Teams[i].Name))
+            {
+                TeamErrors[i] = teamNameValidator.ErrorMessage;
+                allValid = false;
+            }
+        }
+        if (allValid)
+        {
+            await RandomStrengthGenerator();
+            simulationService.SaveTeams(Teams);
+        }
+    }
+
+    private async Task RandomStrengthGenerator()
+    {
+        Random random = new Random();
+        foreach (var team in Teams)
+        {
+            team.Strength = random.Next(1, 100);
+        }
+    }
+
+    string BindTeamName(int index)
+    {
+        return Teams[index].Name;
+    }
+
+    void SetTeamName(int index, string value)
+    {
+        Teams[index].Name = value;
+    }
+
+    System.Linq.Expressions.Expression<Func<string>> ForTeamName(int index)
+    {
+        return () => Teams[index].Name;
+    }
+
+}
+
+<h3>Champions League</h3>
+
+<EditForm Model="@Teams" OnSubmit="ValidateAndSaveTeams">
+
+<div class=""> 
+  @for (int i = 0; i < Teams.Count; i++)
+  {
+      var idx = i;
+      <div class="team-input-group">
+          <label>Team @AlphabetUpper[idx] name:</label>
+          <InputText Value="@BindTeamName(idx)" ValueChanged="@((string val) => SetTeamName(idx, val))" ValueExpression="@ForTeamName(idx)" />
+
+          @if (!string.IsNullOrEmpty(TeamErrors[idx]))
+          {
+              <span class="text-danger">@TeamErrors[idx]</span>
+          }
+      </div>
+  }
+    
+    <input type="submit" class="btn btn-primary" value="generate tournament">
+</div>
+</EditForm>
+

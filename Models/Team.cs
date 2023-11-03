@@ -7,11 +7,11 @@ namespace Simulator.Models
 {
     public class Team
     {
-        public string? Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int Strength { get; set; }
         public int Points { get; set; }
-        public int GoalsFor { get; set; }
-        public int GoalsAgainst { get; set; }
-        public int GoalDifference => GoalsFor - GoalsAgainst;
+        public int GoalsScored { get; set; }
+        public int GoalsConceded { get; set; }
+        public int GoalDifference => GoalsScored - GoalsConceded;
     }
 }

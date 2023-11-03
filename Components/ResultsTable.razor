@@ -1,0 +1,31 @@
+@code {
+    [Parameter]
+    public List<Team> Teams { get; set; }
+}
+
+@if (Teams != null && Teams.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Scored</th>
+                <th>Conceded</th>
+                <th>+/-</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var team in Teams)
+            {
+                <tr>
+                    <td>@team.Name</td>
+                    <td>@team.GoalsScored</td>
+                    <td>@team.GoalsConceded</td>
+                    <td>@team.GoalDifference</td>
+                    <td>@team.Points</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

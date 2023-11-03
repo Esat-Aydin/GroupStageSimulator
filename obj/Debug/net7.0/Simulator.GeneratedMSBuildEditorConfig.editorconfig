@@ -20,28 +20,16 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Components/LeagueTable.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MZWFndWVUYWJsZS5yYXpvcg==
+[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Components/ResultsTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9SZXN1bHRzVGFibGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Components/MatchSimulator.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NYXRjaFNpbXVsYXRvci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmV0Y2hEYXRhLnJhem9y
+[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Components/TeamSetup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9UZWFtU2V0dXAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Shared/SurveyPrompt.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/_Imports.razor]
