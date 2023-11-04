@@ -13,11 +13,12 @@ namespace Simulator.Services
         private List<Team> Teams = new List<Team>();
         private static readonly Random random = new Random();
 
-        public void SaveTeams(List<Team> teams)
+        public async void SaveTeams(List<Team> teams)
         {
             Teams.Clear();
             Teams.AddRange(teams);
-            SimulateMatches(Teams);
+            await SimulateMatches(Teams);
+            await GroupPlaces();
         }
 
         public IReadOnlyList<Team> GetAllTeams()
@@ -25,7 +26,11 @@ namespace Simulator.Services
             return Teams.AsReadOnly();
         }
 
-        public void SimulateMatches(List<Team> teams)
+        public async Task GroupPlaces(){
+            Teams = Teams.OrderByDescending(t => t.Points).ThenByDescending(t => t.GoalDifference).ThenByDescending(t => t.GoalsScored).ToList();
+        }
+
+        public async Task SimulateMatches(List<Team> teams)
         {
             List<Team> randomizedTeams = teams.OrderBy(t => Guid.NewGuid()).ToList();
 

@@ -1,6 +1,18 @@
 ﻿@page "/"
 @using Simulator.Components;
+@inject Simulator.Services.SimulationService simulationService;
 
 <PageTitle>Champions League</PageTitle>
 
-<TeamSetup />
+<ResultsTable Teams="teams" />
+<TeamSetup OnSimulationCompleted="HandleSimulationCompleted" />
+
+@code {
+    private List<Team> teams;
+
+    private void HandleSimulationCompleted()
+    {
+        teams = simulationService.GetAllTeams().ToList();
+        StateHasChanged(); // This might be needed to refresh the UI
+    }
+}

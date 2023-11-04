@@ -1,9 +1,23 @@
+@inject Simulator.Services.TournamentStateService tournamentState
+
+
+
 @code {
     [Parameter]
     public List<Team> Teams { get; set; }
+
+    protected override void OnInitialized(){
+        tournamentState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        tournamentState.OnChange -= StateHasChanged;
+    }
+    
 }
 
-@if (Teams != null && Teams.Any())
+@if (Teams != null && Teams.Any() && tournamentState.ShowTable)
 {
     <table class="table table-bordered">
         <thead>

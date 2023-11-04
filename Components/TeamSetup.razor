@@ -1,9 +1,14 @@
 @using Simulator.Interfaces;
 @inject INameValidator<string> teamNameValidator
 @inject Simulator.Services.SimulationService simulationService
+@inject Simulator.Services.TournamentStateService tournamentStateService
+
 
 
 @code {
+    [Parameter]
+    public EventCallback OnSimulationCompleted { get; set; }
+    public bool ShowGroupTable { get; set; } = false;
     private string[] TeamErrors { get; } = new string[4];
     private char[] AlphabetUpper { get; } = new char[26] {
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
@@ -18,6 +23,20 @@
         new Team()
     };
 
+    private bool ShowTeamsInput { get; set; } = false;
+
+    private void TeamsInputChange(){
+        ShowTeamsInput = !ShowTeamsInput;
+        ShowGroupTable = !ShowGroupTable;
+        tournamentStateService.SetShowTable(ShowGroupTable);
+        ClearTeams();
+    }
+    private void ClearTeams(){
+        for (int i = 0; i < Teams.Count; i++)
+        {
+            Teams[i] = new Team();
+        }  
+    }
     private async Task ValidateAndSaveTeams()
     {
         bool allValid = true;
@@ -33,6 +52,8 @@
         {
             await RandomStrengthGenerator();
             simulationService.SaveTeams(Teams);
+            TeamsInputChange();
+            await OnSimulationCompleted.InvokeAsync();
         }
     }
 
@@ -61,27 +82,34 @@
     }
 
 }
+@if (ShowTeamsInput == false)
+{
+    <h3>Champions League</h3>
 
-<h3>Champions League</h3>
+    <EditForm Model="@Teams" OnSubmit="ValidateAndSaveTeams">
 
-<EditForm Model="@Teams" OnSubmit="ValidateAndSaveTeams">
+    <div class=""> 
+    @for (int i = 0; i < Teams.Count; i++)
+    {
+        var idx = i;
+        <div class="team-input-group">
+            <label>Team @AlphabetUpper[idx] name:</label>
+            <InputText Value="@BindTeamName(idx)" ValueChanged="@((string val) => SetTeamName(idx, val))" ValueExpression="@ForTeamName(idx)" />
 
-<div class=""> 
-  @for (int i = 0; i < Teams.Count; i++)
-  {
-      var idx = i;
-      <div class="team-input-group">
-          <label>Team @AlphabetUpper[idx] name:</label>
-          <InputText Value="@BindTeamName(idx)" ValueChanged="@((string val) => SetTeamName(idx, val))" ValueExpression="@ForTeamName(idx)" />
+            @if (!string.IsNullOrEmpty(TeamErrors[idx]))
+            {
+                <span class="text-danger">@TeamErrors[idx]</span>
+            }
+        </div>
+    }
+        
+        <input type="submit" class="btn btn-primary" value="generate tournament">
+    </div>
+    </EditForm>
+}
+@if (ShowTeamsInput == true)
+{
+    <button class="btn btn-primary" @onclick="TeamsInputChange">New teams</button>
+}
 
-          @if (!string.IsNullOrEmpty(TeamErrors[idx]))
-          {
-              <span class="text-danger">@TeamErrors[idx]</span>
-          }
-      </div>
-  }
-    
-    <input type="submit" class="btn btn-primary" value="generate tournament">
-</div>
-</EditForm>
 
