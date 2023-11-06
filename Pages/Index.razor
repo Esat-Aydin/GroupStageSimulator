@@ -5,14 +5,19 @@
 <PageTitle>Champions League</PageTitle>
 
 <ResultsTable Teams="teams" />
+<MatchResults Matches="matches" />
 <TeamSetup OnSimulationCompleted="HandleSimulationCompleted" />
 
 @code {
     private List<Team> teams;
-
+    private List<Match> matches;
+    private bool IsTournamentGenerated { get; set; } = false;
+    
     private void HandleSimulationCompleted()
     {
         teams = simulationService.GetAllTeams().ToList();
+        matches = simulationService.GetMatchResults().ToList();
+
         StateHasChanged(); // This might be needed to refresh the UI
     }
 }

@@ -20,6 +20,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Components/MatchResults.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NYXRjaFJlc3VsdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/esataydin/Documents/GitHub/GroupStageSimulator/Simulator/Components/ResultsTable.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9SZXN1bHRzVGFibGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

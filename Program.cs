@@ -13,6 +13,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<SimulationService>();
 builder.Services.AddScoped<INameValidator<string>, TeamNameValidator>();
 builder.Services.AddScoped<TournamentStateService>();
+builder.Services.AddScoped<MatchStateService>();
+
 
 
 await builder.Build().RunAsync();

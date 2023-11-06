@@ -1,28 +1,12 @@
-@inject Simulator.Services.TournamentStateService tournamentState
-
-
-
-@code {
-    [Parameter]
-    public List<Team> Teams { get; set; }
-
-    protected override void OnInitialized(){
-        tournamentState.OnChange += StateHasChanged;
-    }
-
-    public void Dispose()
-    {
-        tournamentState.OnChange -= StateHasChanged;
-    }
-    
-}
-
 @if (Teams != null && Teams.Any() && tournamentState.ShowTable)
 {
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Wins</th>
+                <th>Draws</th>
+                <th>Losses</th>
                 <th>Scored</th>
                 <th>Conceded</th>
                 <th>+/-</th>
@@ -34,6 +18,9 @@
             {
                 <tr>
                     <td>@team.Name</td>
+                    <td>@team.Wins</td>
+                    <td>@team.Draws</td>
+                    <td>@team.Losses</td>
                     <td>@team.GoalsScored</td>
                     <td>@team.GoalsConceded</td>
                     <td>@team.GoalDifference</td>

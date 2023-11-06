@@ -1,0 +1,23 @@
+@if (Matches != null && Matches.Any() && matchState.ShowMatches)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Home</th>
+                <th>Score</th>
+                <th>Away</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var match in Matches)
+            {
+                <tr>
+                    <td>@match.HomeTeam?.Name</td>
+                    <td>@match.HomeScore - @match.AwayScore</td>
+                    <td>@match.AwayTeam?.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
